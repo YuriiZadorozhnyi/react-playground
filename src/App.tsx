@@ -6,7 +6,7 @@ import Test from "./Test.tsx";
 import {lazy, Suspense} from "react";
 import Search from "./Search/Search.tsx";
 import Nested from "./components/Nested.tsx";
-import FormWithState from "./components/FormWithState.tsx";
+import ReactHookForm from "./components/ReactHookForm.tsx";
 
 const Products = lazy(() => import("./Products"));
 
@@ -21,7 +21,7 @@ function App() {
                 <Route path="/about" element={<Test text={'about'}/>} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/search" element={<Search />} />
-                <Route path="/simple-form" element={<FormWithState />} />
+                <Route path="/simple-form" element={<ReactHookForm />} />
                 <Route path="/nested-element" element={<Nested><span>Some nested text</span></Nested>} />
               </Routes>
           </Suspense>

@@ -1,12 +1,14 @@
 import { useForm, SubmitHandler } from "react-hook-form"
+import { useContext } from "react";
+import { GlobalContext } from "../App.tsx";
 
-enum GenderEnum {
+export enum GenderEnum {
     female = "female",
     male = "male",
     other = "other",
 }
 
-interface IFormInput {
+export interface IFormInput {
     firstName: string;
     lastName: string;
     age: number;
@@ -16,7 +18,8 @@ interface IFormInput {
 type FormInputKeys = keyof IFormInput;
 
 export default function ReactHookForm() {
-    const { register, handleSubmit, watch, formState: { errors }, } = useForm<IFormInput>();
+    const globalContext = useContext(GlobalContext);
+    const { register, handleSubmit, watch, formState: { errors }, } = useForm<IFormInput>({ defaultValues: globalContext });
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         console.log(data)

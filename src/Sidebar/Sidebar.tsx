@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Sidebar.css";
 import {SidebarProps} from "./sidebar.ts";
 
-const Sidebar: React.FC<SidebarProps> = ({ items }) => {
+const Sidebar: React.FC<SidebarProps> = ({ items, setDefault }) => {
     return (
         <div className="sidebar">
             <ul className="sidebar__list">
@@ -15,6 +15,7 @@ const Sidebar: React.FC<SidebarProps> = ({ items }) => {
                     </li>
                 ))}
             </ul>
+            <button onClick={() => setDefault()}>SET DEFAULT</button>
         </div>
     );
 };

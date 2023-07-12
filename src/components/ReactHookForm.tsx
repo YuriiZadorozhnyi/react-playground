@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form"
 import { useContext } from "react";
-import { GlobalContext } from "../App.tsx";
+import { GlobalDynamicContext } from "../App.tsx";
 
 export enum GenderEnum {
     female = "female",
@@ -18,12 +18,18 @@ export interface IFormInput {
 type FormInputKeys = keyof IFormInput;
 
 export default function ReactHookForm() {
-    const globalContext = useContext(GlobalContext);
-    const { register, handleSubmit, watch, formState: { errors }, } = useForm<IFormInput>({ defaultValues: globalContext });
+    const globalContext: IFormInput = useContext(GlobalDynamicContext);
+    const { register, handleSubmit, watch, formState: { errors }, setValue  } = useForm<IFormInput>({ defaultValues: globalContext });
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         console.log(data)
     }
+
+    const handleFormUpdate = () => {
+        Object.entries(globalContext).forEach(([name, value]) => {
+            setValue(name as FormInputKeys, value);
+        });
+    };
 
     console.log("firstName value was changed: " + watch("firstName"));
 
@@ -48,6 +54,10 @@ export default function ReactHookForm() {
 
             {errors && Object.keys(errors).map(error => <p style={{ color: 'red' }} key={error}>{`${error}:${errors[error as FormInputKeys]?.type}`}</p>)}
             <input type="submit" />
+
+            <button onClick={() => handleFormUpdate()}>USE DEFAULT</button>
+
+            <div>{ globalContext.firstName }</div>
         </form>
     )
 }

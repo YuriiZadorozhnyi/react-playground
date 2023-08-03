@@ -40,6 +40,7 @@ function App() {
                         <Route path="/search" element={<Search />} />
                         <Route path="/simple-form" element={<ReactHookForm />} />
                         <Route path="/nested-element" element={<Nested><span>Some nested text</span></Nested>} />
+                        <Route path="*" element={<div>Not found</div>} />
                       </Routes>
                   </Suspense>
               </BrowserRouter>

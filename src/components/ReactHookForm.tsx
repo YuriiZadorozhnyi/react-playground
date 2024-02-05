@@ -13,6 +13,7 @@ export interface IFormInput {
     lastName: string;
     age: number;
     gender: GenderEnum;
+    email?: string;
 }
 
 type FormInputKeys = keyof IFormInput;
